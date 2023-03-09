@@ -1,6 +1,5 @@
 'use stict';
 import { galleryItems } from './gallery-items.js';
-// Change code below this line
 //1.Створення і рендер розмітки на підставі масиву даних galleryItems і наданого шаблону елемента галереї.
 //2.Реалізація делегування на div.gallery і отримання url великого зображення.
 //3.Підключення скрипту і стилів бібліотеки модального вікна basicLightbox. 
