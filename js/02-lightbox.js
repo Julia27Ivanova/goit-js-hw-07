@@ -8,41 +8,27 @@
 //4.Подивитися в документації секцію «Options» і додати відображення підписів до зображень з атрибута alt.
 // Нехай підпис буде знизу і з'являється через 250 мілісекунд після відкриття зображення.
 import { galleryItems } from './gallery-items.js';
-const galleryImg = document.querySelector('.gallery');
-const imagesMarkup = createGalleryMarkup(galleryItems);
-galleryImg.insertAdjacentHTML('beforeend', imagesMarkup);
-galleryImg.addEventListener('click', onImageClick);
+// Change code below this line
+console.log(galleryItems);
 
-function createGalleryMarkup(galleryItems) {
-  return galleryItems
-    .map(({ preview, original, description }) => {
-      return `<div class="gallery__item">
-    <a class="gallery__item" href="${original}">
-  <img class="gallery__image" src="${preview}" alt="${description}"/>
-</a>
-  </div>`;
-    })
+const galleryImg = document.querySelector('.gallery');
+galleryImg.innerHTML = createGalleryItemsMarkup(galleryItems);
+
+function createGalleryItemsMarkup(items) {
+  return items
+    .map(
+      item => `<a class="gallery__item" href="${item.original}">
+        <img class="gallery__image" src="${item.preview}" alt="${item.description}" />
+      </a>`,
+    )
     .join('');
 }
 
-function stopLoadingImg(e) {
-  e.preventDefault();
-}
-
-function summonSimpleLightbox() {
-  new SimpleLightbox('.gallery a', {
-    captions: true,
-    captionsData: 'alt',
-    captionDelay: 250,
-  });
-}
-
-function onImageClick(e) {
-  stopLoadingImg(e);
-
-  if (e.target.nodeName === 'IMG') {
-    summonSimpleLightbox();
-  }
-}
-
-console.log(galleryItems);
+const settingsSimpleLightbox = {
+  captionsData: 'alt',
+  captionDelay: 250,
+};
+let gallerySimpleLightbox = new SimpleLightbox(
+  '.gallery a',
+  settingsSimpleLightbox,
+);
